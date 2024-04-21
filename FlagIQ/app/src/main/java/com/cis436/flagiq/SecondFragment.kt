@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.cis436.flagiq.databinding.FragmentSecondBinding
@@ -83,6 +84,11 @@ class SecondFragment : Fragment() {
                     }
                 }
 
+                binding.button.setOnClickListener { checkAnswer(binding.button) }
+                binding.button2.setOnClickListener { checkAnswer(binding.button2) }
+                binding.button3.setOnClickListener { checkAnswer(binding.button3) }
+                binding.button4.setOnClickListener { checkAnswer(binding.button4) }
+
                 // Increment currentIndex for the next question
                 currentIndex++
             } else {
@@ -99,11 +105,18 @@ class SecondFragment : Fragment() {
             val currentCountry = countries[currentIndex - 1] // Adjust index by -1 due to 0-based indexing
             if (selectedCountryName == currentCountry.name) {
                 // Correct answer
+                Toast.makeText(requireContext(), "Your answer is correct!", Toast.LENGTH_SHORT).show()
                 // Display next question
                 displayQuestion()
             } else {
                 // Incorrect answer
                 // Handle incorrect answer (e.g., display message, navigate to a different fragment)
+                Toast.makeText(requireContext(), "Wrong answer! Game over", Toast.LENGTH_SHORT).show()
+                binding.button.isEnabled = false
+                binding.button2.isEnabled = false
+                binding.button3.isEnabled = false
+                binding.button4.isEnabled = false
+
             }
         }
     }
