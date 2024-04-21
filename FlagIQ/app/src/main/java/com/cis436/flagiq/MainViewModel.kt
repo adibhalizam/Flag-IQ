@@ -3,6 +3,7 @@ package com.cis436.flagiq
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -17,6 +18,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application)
     )
 
     private val _countries = MutableLiveData<List<Country>>()
+    val countries: LiveData<List<Country>> get() = _countries
 
     init{
         fetchCountryData()
