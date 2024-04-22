@@ -1,6 +1,7 @@
 package com.cis436.flagiq
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.cis436.flagiq.databinding.FragmentSecondBinding
@@ -26,6 +28,7 @@ class SecondFragment : Fragment() {
     private var currentIndex = 0 // Keep track of the current question index
     private var correctCountry : String = ""
     private var currentScore : Int = 0
+    private var correctButtonIndex : Int = 0
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -75,7 +78,7 @@ class SecondFragment : Fragment() {
                 Picasso.get().load(currentCountry.flagUrl).into(binding.imageView)
                 correctCountry = currentCountry.name
                 // Randomly select a button index to place the correct answer
-                val correctButtonIndex = (1..4).random()
+                correctButtonIndex = (1..4).random()
                 viewModel.removeCountry(currentIndex)
                 Log.e("e","${viewModel.countries.value?.size}")
                 // Set correct answer button text
@@ -141,10 +144,32 @@ class SecondFragment : Fragment() {
                     editor.apply()
                 }
                 binding.button.isEnabled = false
+                binding.button.setBackgroundColor(Color.rgb(255, 0, 0))
+                binding.button.setTextColor(Color.BLACK)
                 binding.button2.isEnabled = false
+                binding.button2.setBackgroundColor(Color.rgb(255, 0, 0))
+                binding.button2.setTextColor(Color.BLACK)
                 binding.button3.isEnabled = false
+                binding.button3.setBackgroundColor(Color.rgb(255, 0, 0))
+                binding.button3.setTextColor(Color.BLACK)
                 binding.button4.isEnabled = false
+                binding.button4.setBackgroundColor(Color.rgb(255, 0, 0))
+                binding.button4.setTextColor(Color.BLACK)
 
+                when (correctButtonIndex) {
+                    1 -> {
+                        binding.button.setBackgroundColor(Color.rgb(0, 255, 0))
+                    }
+                    2 -> {
+                        binding.button2.setBackgroundColor(Color.rgb(0, 255, 0))
+                    }
+                    3 -> {
+                        binding.button3.setBackgroundColor(Color.rgb(0, 255, 0))
+                    }
+                    4 -> {
+                        binding.button4.setBackgroundColor(Color.rgb(0, 255, 0))
+                    }
+                }
             }
 
     }
