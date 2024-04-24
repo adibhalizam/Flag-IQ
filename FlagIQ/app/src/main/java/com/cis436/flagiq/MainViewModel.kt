@@ -36,11 +36,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application)
             { response ->
                 // Parse the JSON response
                 val countriesList = parseCountries(response)
-                // Update the LiveData with the parsed cat breeds
+                // Update the LiveData with the parsed countries
                 _countries.value = countriesList
             },
             {
-                Log.e("MainViewModel", "Error occurred while fetching cat breeds")
+                Log.e("MainViewModel", "Error occurred while fetching countries")
             })
 
         // Add the request to the RequestQueue

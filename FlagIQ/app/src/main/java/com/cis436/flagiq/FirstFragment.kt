@@ -44,6 +44,7 @@ class FirstFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         score = sharedPreferences.getInt("score", 0)
         binding.highScore.text = score.toString()
+        binding.pbScore.setProgress(score, true)
     }
 
     override fun onDestroyView() {

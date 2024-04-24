@@ -19,7 +19,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview_first"
-            app:layout_constraintVertical_bias="0.173"
+            app:layout_constraintVertical_bias="0.298"
             app:strokeColor="#2359EB"
             app:strokeWidth="2dp"
             tools:layout_conversion_absoluteHeight="48dp"
@@ -35,9 +35,10 @@
             android:textSize="48sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.308"
+            app:layout_constraintVertical_bias="0.377"
             tools:layout_conversion_absoluteHeight="888dp"
             tools:layout_conversion_absoluteWidth="379dp" />
 
@@ -45,26 +46,50 @@
             android:id="@+id/highscoreLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="72dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
             android:fontFamily="sans-serif-black"
             android:text="High Score"
             android:textColor="#2359EB"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/pbScore"
+            app:layout_constraintEnd_toStartOf="@+id/highScore"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.666" />
 
         <TextView
             android:id="@+id/highScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-light"
             android:text="0"
             android:textColor="#2359EB"
-            android:textSize="34sp"
+            android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/pbScore"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/highscoreLabel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ProgressBar
+            android:id="@+id/pbScore"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="219dp"
+            android:layout_height="41dp"
+            android:clickable="false"
+            android:indeterminate="false"
+            android:max="197"
+            android:progressTint="#2359EB"
+            app:layout_constraintBottom_toTopOf="@+id/textview_first"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/highscoreLabel" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.604" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
