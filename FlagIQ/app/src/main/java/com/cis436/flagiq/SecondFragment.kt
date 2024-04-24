@@ -1,8 +1,13 @@
 package com.cis436.flagiq
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.cis436.flagiq.databinding.FragmentSecondBinding
+import com.shashank.sony.fancytoastlib.FancyToast
 import com.squareup.picasso.Picasso
 
 /**
@@ -47,8 +53,47 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        binding.buttonSecond.isEnabled = true
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.return_dialog)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val confirmBtn = dialog.findViewById<Button>(R.id.confirm_button)
+        val cancelBtn = dialog.findViewById<Button>(R.id.cancel_btn)
+
+        confirmBtn.setOnClickListener {
+            // Reduce opacity
+            confirmBtn.alpha = 0.5f
+
+            // Delay action for a short duration (e.g., 200 milliseconds)
+            Handler(Looper.getMainLooper()).postDelayed({
+                // Restore opacity
+                confirmBtn.alpha = 1.0f
+
+                // Navigate to the desired fragment
+                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+
+                // Dismiss the dialog
+                dialog.dismiss()
+            }, 20)
+        }
+
+        cancelBtn.setOnClickListener{
+            confirmBtn.alpha = 0.5f
+
+            // Delay action for a short duration (e.g., 200 milliseconds)
+            Handler(Looper.getMainLooper()).postDelayed({
+                // Restore opacity
+                confirmBtn.alpha = 1.0f
+
+                // Navigate to the desired fragment
+                // Dismiss the dialog
+                dialog.dismiss()
+            }, 20)
+        }
+
         binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            dialog.show()
         }
 
         // Observe countries LiveData
@@ -66,8 +111,37 @@ class SecondFragment : Fragment() {
 
         // Check if countriesList is not null and currentIndex is within bounds
         countriesList?.let { countries ->
-            if(countries.size == 0){
-                Toast.makeText(requireContext(), "Congratulations Flag Master! You solved all questions", Toast.LENGTH_SHORT).show()
+            if(countries.isEmpty()){
+                val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                val highScore = sharedPreferences.getInt("score", 0)
+                val editor = sharedPreferences.edit()
+                editor.putInt("score", currentScore)
+                editor.apply()
+
+                val dialog = Dialog(requireContext())
+                dialog.setContentView(R.layout.win_dialog)
+                dialog.setCanceledOnTouchOutside(false)
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                val confirmBtn = dialog.findViewById<Button>(R.id.confirm_button)
+
+                confirmBtn.setOnClickListener {
+                    // Reduce opacity
+                    confirmBtn.alpha = 0.5f
+                    // Delay action for a short duration (e.g., 200 milliseconds)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        // Restore opacity
+                        confirmBtn.alpha = 1.0f
+
+                        // Navigate to the desired fragment
+                        findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+
+                        // Dismiss the dialog
+                        dialog.dismiss()
+                    }, 20)
+                }
+                dialog.show()
+
+
             }
             else if (countries.size > 0) {
                 currentIndex = (0 until countries.size).random()
@@ -127,15 +201,16 @@ class SecondFragment : Fragment() {
             val selectedCountryName = button.text.toString()
             if (selectedCountryName == correctCountry) {
                 // Correct answer
-                Toast.makeText(requireContext(), "Your answer is correct!", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(requireContext(), "Your answer is correct!", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS,true).show()
                 currentScore++
                 binding.score.text = currentScore.toString()
                 // Display next question
                 displayQuestion()
             } else {
+                binding.buttonSecond.isEnabled = false
                 // Incorrect answer
                 // Handle incorrect answer (e.g., display message, navigate to a different fragment)
-                Toast.makeText(requireContext(), "Wrong answer! Game over", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(requireContext(), "Wrong answer! Game over", FancyToast.LENGTH_SHORT, FancyToast.ERROR,true).show()
                 val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                 val highScore = sharedPreferences.getInt("score", 0)
                 if(currentScore > highScore) {
@@ -144,36 +219,63 @@ class SecondFragment : Fragment() {
                     editor.apply()
                 }
                 binding.button.isEnabled = false
-                binding.button.setBackgroundColor(Color.rgb(211, 211, 211))
+                binding.button.setBackgroundResource(R.drawable.disable_button)
                 binding.button.setTextColor(Color.rgb(169, 169, 169))
                 binding.button2.isEnabled = false
-                binding.button2.setBackgroundColor(Color.rgb(211, 211, 211))
+                binding.button2.setBackgroundResource(R.drawable.disable_button)
                 binding.button2.setTextColor(Color.rgb(169, 169, 169))
                 binding.button3.isEnabled = false
-                binding.button3.setBackgroundColor(Color.rgb(211, 211, 211))
+                binding.button3.setBackgroundResource(R.drawable.disable_button)
                 binding.button3.setTextColor(Color.rgb(169, 169, 169))
                 binding.button4.isEnabled = false
-                binding.button4.setBackgroundColor(Color.rgb(211, 211, 211))
+                binding.button4.setBackgroundResource(R.drawable.disable_button)
                 binding.button4.setTextColor(Color.rgb(169, 169, 169))
 
                 when (correctButtonIndex) {
                     1 -> {
-                        binding.button.setBackgroundColor(Color.rgb(149,232,200))
+                        binding.button.setBackgroundResource(R.drawable.correct_answer)
                         binding.button.setTextColor(Color.BLACK)
                     }
                     2 -> {
-                        binding.button2.setBackgroundColor(Color.rgb(149,232,200))
+                        binding.button2.setBackgroundResource(R.drawable.correct_answer)
                         binding.button2.setTextColor(Color.BLACK)
                     }
                     3 -> {
-                        binding.button3.setBackgroundColor(Color.rgb(149,232,200))
+                        binding.button3.setBackgroundResource(R.drawable.correct_answer)
                         binding.button3.setTextColor(Color.BLACK)
                     }
                     4 -> {
-                        binding.button4.setBackgroundColor(Color.rgb(149,232,200))
+                        binding.button4.setBackgroundResource(R.drawable.correct_answer)
                         binding.button4.setTextColor(Color.BLACK)
                     }
                 }
+
+                val dialog = Dialog(requireContext())
+                dialog.setContentView(R.layout.lose_dialog)
+                dialog.setCanceledOnTouchOutside(false)
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                val confirmBtn = dialog.findViewById<Button>(R.id.confirm_button)
+
+                confirmBtn.setOnClickListener {
+                    // Reduce opacity
+                    confirmBtn.alpha = 0.5f
+
+                    // Delay action for a short duration (e.g., 200 milliseconds)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        // Restore opacity
+                        confirmBtn.alpha = 1.0f
+
+                        // Navigate to the desired fragment
+                        findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+
+                        // Dismiss the dialog
+                        dialog.dismiss()
+                    }, 280)
+                }
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dialog.show()
+                }, 2000)
             }
 
     }
