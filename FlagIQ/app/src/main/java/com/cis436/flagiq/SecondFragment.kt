@@ -144,30 +144,34 @@ class SecondFragment : Fragment() {
                     editor.apply()
                 }
                 binding.button.isEnabled = false
-                binding.button.setBackgroundColor(Color.rgb(255, 0, 0))
-                binding.button.setTextColor(Color.BLACK)
+                binding.button.setBackgroundColor(Color.rgb(211, 211, 211))
+                binding.button.setTextColor(Color.rgb(169, 169, 169))
                 binding.button2.isEnabled = false
-                binding.button2.setBackgroundColor(Color.rgb(255, 0, 0))
-                binding.button2.setTextColor(Color.BLACK)
+                binding.button2.setBackgroundColor(Color.rgb(211, 211, 211))
+                binding.button2.setTextColor(Color.rgb(169, 169, 169))
                 binding.button3.isEnabled = false
-                binding.button3.setBackgroundColor(Color.rgb(255, 0, 0))
-                binding.button3.setTextColor(Color.BLACK)
+                binding.button3.setBackgroundColor(Color.rgb(211, 211, 211))
+                binding.button3.setTextColor(Color.rgb(169, 169, 169))
                 binding.button4.isEnabled = false
-                binding.button4.setBackgroundColor(Color.rgb(255, 0, 0))
-                binding.button4.setTextColor(Color.BLACK)
+                binding.button4.setBackgroundColor(Color.rgb(211, 211, 211))
+                binding.button4.setTextColor(Color.rgb(169, 169, 169))
 
                 when (correctButtonIndex) {
                     1 -> {
-                        binding.button.setBackgroundColor(Color.rgb(0, 255, 0))
+                        binding.button.setBackgroundColor(Color.rgb(149,232,200))
+                        binding.button.setTextColor(Color.BLACK)
                     }
                     2 -> {
-                        binding.button2.setBackgroundColor(Color.rgb(0, 255, 0))
+                        binding.button2.setBackgroundColor(Color.rgb(149,232,200))
+                        binding.button2.setTextColor(Color.BLACK)
                     }
                     3 -> {
-                        binding.button3.setBackgroundColor(Color.rgb(0, 255, 0))
+                        binding.button3.setBackgroundColor(Color.rgb(149,232,200))
+                        binding.button3.setTextColor(Color.BLACK)
                     }
                     4 -> {
-                        binding.button4.setBackgroundColor(Color.rgb(0, 255, 0))
+                        binding.button4.setBackgroundColor(Color.rgb(149,232,200))
+                        binding.button4.setTextColor(Color.BLACK)
                     }
                 }
             }
