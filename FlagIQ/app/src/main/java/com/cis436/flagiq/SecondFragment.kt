@@ -79,12 +79,12 @@ class SecondFragment : Fragment() {
         }
 
         cancelBtn.setOnClickListener{
-            confirmBtn.alpha = 0.5f
+            cancelBtn.alpha = 0.5f
 
             // Delay action for a short duration (e.g., 200 milliseconds)
             Handler(Looper.getMainLooper()).postDelayed({
                 // Restore opacity
-                confirmBtn.alpha = 1.0f
+                cancelBtn.alpha = 1.0f
 
                 // Navigate to the desired fragment
                 // Dismiss the dialog

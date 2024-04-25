@@ -50,7 +50,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application)
         val countriesList = mutableListOf<Country>()
         try {
             val jsonArray = JSONArray(response)
-            for (i in 0 until 5) {
+            for (i in 0 until jsonArray.length()) {
                 val jsonObject = jsonArray.getJSONObject(i)
                 val name = jsonObject.getJSONObject("name").getString("common")
                 val imageObject = jsonObject.optJSONObject("flags")
