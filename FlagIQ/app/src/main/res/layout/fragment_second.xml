@@ -5,16 +5,19 @@
     android:id="@+id/nestedScrollView2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CEE8DE"
+    android:background="@color/white"
     tools:context=".SecondFragment">
 
     <Button
         android:id="@+id/button_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#71A7EB"
-        android:text="Back"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/return_btn"
+        android:fontFamily="sans-serif-black"
+        android:text="BACK"
         android:textColor="@color/white"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
@@ -42,15 +45,15 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="180dp"
+        android:layout_width="160dp"
         android:layout_height="140dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="70dp"
-        android:backgroundTint="#95E8C8"
+        android:background="@drawable/answer_btn"
         android:text="Button"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="22sp"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toStartOf="@+id/button2"
@@ -58,19 +61,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:strokeColor="#2359EB"
-        app:strokeWidth="1dp" />
+        app:strokeWidth="1dp"
+        app:autoSizeMinTextSize="5sp"
+        app:autoSizeMaxTextSize="12sp"/>
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="180dp"
+        android:layout_width="160dp"
         android:layout_height="140dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="70dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="#95E8C8"
+        android:background="@drawable/answer_btn"
         android:text="Button"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="22sp"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,60 +84,68 @@
         app:layout_constraintStart_toEndOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:strokeColor="#2359EB"
-        app:strokeWidth="1dp" />
+        app:strokeWidth="1dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="22sp"/>
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="180dp"
+        android:layout_width="160dp"
         android:layout_height="140dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="70dp"
-        android:backgroundTint="#95E8C8"
+        android:background="@drawable/answer_btn"
         android:text="Button"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="22sp"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:strokeColor="#2359EB"
-        app:strokeWidth="1dp" />
+        app:strokeColor="#FF4671C5"
+        app:strokeWidth="5dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="22sp"/>
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="180dp"
+        android:layout_width="160dp"
         android:layout_height="140dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="70dp"
-        android:backgroundTint="#95E8C8"
+        android:background="@drawable/answer_btn"
         android:text="Button"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button3"
         app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:strokeColor="#2359EB"
-        app:strokeWidth="1dp" />
+        app:strokeColor="#FF4671C5"
+        app:strokeWidth="5dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="22sp"/>
 
     <TextView
         android:id="@+id/scoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
         android:fontFamily="sans-serif-black"
         android:text="Score"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.011"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toEndOf="@+id/button_second"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -147,6 +161,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreLabel" />
 
+
     <View
         android:id="@+id/divider"
         android:layout_width="409dp"
@@ -157,4 +172,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
