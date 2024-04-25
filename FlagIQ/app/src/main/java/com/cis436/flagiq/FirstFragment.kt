@@ -1,17 +1,19 @@
 package com.cis436.flagiq
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.cis436.flagiq.databinding.FragmentFirstBinding
-import kotlin.properties.Delegates
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -38,6 +40,13 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Trigger back button to exit current activity
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            val a = Intent(Intent.ACTION_MAIN)
+            a.addCategory(Intent.CATEGORY_HOME)
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(a)
+        }
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         viewModel.fetchCountryData()
         binding.buttonFirst.setOnClickListener {
