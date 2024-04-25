@@ -23,7 +23,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application)
     init{
         fetchCountryData()
     }
-    private fun fetchCountryData() {
+    public fun fetchCountryData() {
         // Replace the API key with your own
         val countryUrl = "https://restcountries.com/v3.1/all"
 
@@ -36,11 +36,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application)
             { response ->
                 // Parse the JSON response
                 val countriesList = parseCountries(response)
-                // Update the LiveData with the parsed cat breeds
+                // Update the LiveData with the parsed countries
                 _countries.value = countriesList
             },
             {
-                Log.e("MainViewModel", "Error occurred while fetching cat breeds")
+                Log.e("MainViewModel", "Error occurred while fetching countries")
             })
 
         // Add the request to the RequestQueue
@@ -64,6 +64,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application)
         Log.d("MainViewModel", "Size: ${countriesList.size}")
         return countriesList
     }
+    public fun removeCountry(currentIndex : Int){
+        _countries.value?.toMutableList()?.let { mutableCountries ->
+            // Check if the index is within bounds
+            if (currentIndex >= 0 && currentIndex < mutableCountries.size) {
+                mutableCountries.removeAt(currentIndex)
+                _countries.value = mutableCountries.toList()
+            }
+        }
+    }
+
 
 
 
